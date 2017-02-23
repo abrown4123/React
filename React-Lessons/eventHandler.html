@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React - Component</title>
+    <script src="../../js/react.min.js"></script>
+    <script src="../../js/react-dom.min.js"></script>
+    <script src="../../js/browser.min.js"></script>
+	<style>
+		.board {
+			background-color: lightblue;
+		}
+	</style>
+</head>
+<body>
+
+    <div id="container"></div>
+
+    <script type="text/babel">
+        var Comment = React.createClass({
+			getInitialState: function(){
+				return{editing: false}
+			}, 
+			edit: function (){
+				this.setState({editing:true});
+			},
+			remove: function(){
+				console.log
+			},
+			save: function(){
+				this.setState({editing:false})
+			},
+			renderNormal: function(){
+				return (
+						<div className = "commentContainer">
+							<div className = "Text">{this.props.children}</div>
+							<button onClick = {this.edit}>Edit</button>
+							<button onClick = {this.remove}>Remove</button>
+						</div>
+				);
+			},
+			renderForm: function(){
+				return (
+						<div className = "commentContainer">
+							<textarea defaultValue = {this.props.children}></textarea>
+							<button onClick = {this.save}>Save</button>
+						</div>
+				);
+			},
+			render: function(){
+				if(this.state.editing){
+					return this.renderForm();
+				} else{
+					return this.renderNormal();
+				}
+			}
+		});
+        ReactDOM.render(
+			<div className = "board">
+				<Comment>Hey my name is Anthony</Comment>
+				<Comment>Get Groceries</Comment>
+				<Comment>Take Out the Trash</Comment>
+			</div>
+			, document.getElementById('container'));
+    </script>
+
+</body>
+</html>
